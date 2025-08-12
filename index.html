@@ -110,6 +110,28 @@
     color: var(--secondary);
   }
 
+  .content {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+
+  .content img {
+    flex: 1 1 250px;
+    max-width: 300px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    object-fit: cover;
+  }
+
+  .content p,
+  .content ul {
+    flex: 2 1 350px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
   ul {
     list-style: none;
     padding-left: 0;
@@ -117,7 +139,6 @@
 
   ul li {
     margin: 12px 0;
-    font-size: 1.2rem;
   }
 
   footer {
@@ -135,7 +156,18 @@
   }
 
   /* Responsive */
-  @media (max-width: 600px) {
+  @media (max-width: 700px) {
+    .content {
+      flex-direction: column;
+    }
+
+    .content img,
+    .content p,
+    .content ul {
+      flex: unset;
+      max-width: 100%;
+    }
+
     nav {
       flex-wrap: wrap;
       padding: 10px 0;
@@ -181,36 +213,54 @@
 <main>
   <section id="about" class="active">
     <h2>About Me</h2>
-    <p>Write a summary about yourself, your education, and goals here.</p>
+    <div class="content">
+      <img src="about-photo.jpg" alt="About Me Photo" />
+      <p>Write a summary about yourself, your education, and goals here.</p>
+    </div>
   </section>
 
   <section id="skills">
     <h2>Skills</h2>
-    <ul>
-      <li>HTML, CSS, JavaScript</li>
-      <li>Python, C++</li>
-      <li>Machine Learning</li>
-    </ul>
+    <div class="content">
+      <img src="skills-photo.jpg" alt="Skills Illustration" />
+      <ul>
+        <li>HTML, CSS, JavaScript</li>
+        <li>Python, C++</li>
+        <li>Machine Learning</li>
+      </ul>
+    </div>
   </section>
 
   <section id="projects">
     <h2>Projects</h2>
-    <p>Description of main projects you have worked on.</p>
+    <div class="content">
+      <img src="projects-photo.jpg" alt="Projects Screenshot" />
+      <p>Description of main projects you have worked on.</p>
+    </div>
   </section>
 
   <section id="publications">
     <h2>Publications</h2>
-    <p>List of articles and publications.</p>
+    <div class="content">
+      <img src="publications-photo.jpg" alt="Publications Cover" />
+      <p>List of articles and publications.</p>
+    </div>
   </section>
 
   <section id="awards">
     <h2>Awards & Scholarships</h2>
-    <p>List of awards and scholarships received.</p>
+    <div class="content">
+      <img src="awards-photo.jpg" alt="Awards and Scholarships" />
+      <p>List of awards and scholarships received.</p>
+    </div>
   </section>
 
   <section id="personal">
     <h2>Personal</h2>
-    <p>Hobbies, personal interests, and fun facts.</p>
+    <div class="content">
+      <img src="personal-photo.jpg" alt="Personal Interests" />
+      <p>Hobbies, personal interests, and fun facts.</p>
+    </div>
   </section>
 </main>
 
