@@ -12,6 +12,11 @@
     --bg: #1a1a1a;
   }
 
+  /* Prevent sticky nav covering anchors */
+  html {
+    scroll-padding-top: 70px; /* Adjust if nav height changes */
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -74,9 +79,11 @@
   }
 
   nav a:hover,
+  nav a:focus,
   nav a.active {
     color: var(--secondary);
     background-color: rgba(52, 152, 219, 0.15);
+    outline: none;
   }
 
   main {
@@ -201,17 +208,17 @@
   <p>Profession / Field</p>
 </header>
 
-<nav>
-  <a href="#about" class="active">About Me</a>
-  <a href="#skills">Skills</a>
-  <a href="#projects">Projects</a>
-  <a href="#publications">Publications</a>
-  <a href="#awards">Awards</a>
-  <a href="#personal">Personal</a>
+<nav role="navigation" aria-label="Primary Navigation">
+  <a href="#about" class="active" tabindex="0">About Me</a>
+  <a href="#skills" tabindex="0">Skills</a>
+  <a href="#projects" tabindex="0">Projects</a>
+  <a href="#publications" tabindex="0">Publications</a>
+  <a href="#awards" tabindex="0">Awards</a>
+  <a href="#personal" tabindex="0">Personal</a>
 </nav>
 
 <main>
-  <section id="about" class="active">
+  <section id="about" class="active" tabindex="-1">
     <h2>About Me</h2>
     <div class="content">
       <img src="about-photo.jpg" alt="About Me Photo" />
@@ -219,7 +226,7 @@
     </div>
   </section>
 
-  <section id="skills">
+  <section id="skills" tabindex="-1">
     <h2>Skills</h2>
     <div class="content">
       <img src="skills-photo.jpg" alt="Skills Illustration" />
@@ -231,7 +238,7 @@
     </div>
   </section>
 
-  <section id="projects">
+  <section id="projects" tabindex="-1">
     <h2>Projects</h2>
     <div class="content">
       <img src="projects-photo.jpg" alt="Projects Screenshot" />
@@ -239,7 +246,7 @@
     </div>
   </section>
 
-  <section id="publications">
+  <section id="publications" tabindex="-1">
     <h2>Publications</h2>
     <div class="content">
       <img src="publications-photo.jpg" alt="Publications Cover" />
@@ -247,7 +254,7 @@
     </div>
   </section>
 
-  <section id="awards">
+  <section id="awards" tabindex="-1">
     <h2>Awards & Scholarships</h2>
     <div class="content">
       <img src="awards-photo.jpg" alt="Awards and Scholarships" />
@@ -255,7 +262,7 @@
     </div>
   </section>
 
-  <section id="personal">
+  <section id="personal" tabindex="-1">
     <h2>Personal</h2>
     <div class="content">
       <img src="personal-photo.jpg" alt="Personal Interests" />
@@ -272,10 +279,11 @@
   const links = document.querySelectorAll('nav a');
   const sections = document.querySelectorAll('main section');
 
+  // Set active link & section on scroll
   function setActiveLink() {
     let index = sections.length;
 
-    while(--index && window.scrollY + 100 < sections[index].offsetTop) {}
+    while(--index && window.scrollY + 80 < sections[index].offsetTop) {}
     
     links.forEach(link => link.classList.remove('active'));
     links[index].classList.add('active');
@@ -284,6 +292,7 @@
     sections[index].classList.add('active');
   }
 
+  // Smooth scroll and focus section for accessibility
   links.forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
@@ -291,6 +300,8 @@
       const targetSection = document.getElementById(targetId);
 
       targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Focus for screen readers after scrolling
+      targetSection.focus();
     });
   });
 
